@@ -1,0 +1,6 @@
+.announce {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 9px 12px;
+}

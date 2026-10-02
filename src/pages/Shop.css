@@ -1,0 +1,28 @@
+.shop {
+  padding-block: clamp(40px, 6vw, 80px) var(--section-space);
+}
+
+.shop__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.shop__title {
+  font-size: clamp(44px, 8vw, 120px);
+}
+
+.shop__count {
+  color: var(--smoke);
+  padding-bottom: 8px;
+}
+
+.shop__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-block: 40px;
+}

@@ -1,0 +1,159 @@
+/* ---------- TOKENS ---------- */
+:root {
+  /* colour */
+  --paper: #f4f3f0;
+  --panel: #eae8e3;
+  --ink: #16161a;
+  --smoke: #8c8a86;
+  --chrome: #cfd2d6;
+  --red: #c4121f;
+  --white: #ffffff;
+
+  /* type */
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-hand: "Reenie Beanie", "Bradley Hand", cursive;
+
+  /* layout */
+  --gutter: clamp(16px, 4vw, 48px);
+  --section-space: clamp(60px, 9vw, 120px);
+  --radius-pill: 999px;
+
+  /* motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---------- RESET ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-stretch: 90%;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- UTILITIES ---------- */
+.wrap {
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.hand {
+  font-family: var(--font-hand);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.display {
+  font-weight: 700;
+  font-stretch: 75%;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: lowercase;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, #fff, #d7d9dd);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

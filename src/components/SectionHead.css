@@ -1,0 +1,16 @@
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 34px;
+}
+
+.section-head__title {
+  font-size: clamp(32px, 4.5vw, 60px);
+}
+
+.section-head__note {
+  margin-top: 6px;
+  color: var(--smoke);
+}

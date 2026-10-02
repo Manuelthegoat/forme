@@ -1,0 +1,35 @@
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 12px 0;
+  background: linear-gradient(180deg, #f7f8f9, #c7cace 55%, #eceef0);
+  border-block: 1px solid #9da1a8;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+  font-size: 13px;
+}
+
+.marquee__half {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.marquee__half span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.marquee__half i {
+  font-style: normal;
+  margin: 0 22px;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
