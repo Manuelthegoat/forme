@@ -1,54 +1,51 @@
-import { useState, useCallback } from "react";
-import { Routes, Route } from "react-router-dom";
-import Preloader from "./components/Preloader";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import AnnouncementBar from "./components/AnnouncementBar";
-import Navbar from "./components/Navbar";
-import CartDrawer from "./components/CartDrawer";
-import Footer from "./components/Footer";
+import StorefrontLayout from "./components/StorefrontLayout";
+import AdminRoute from "./components/AdminRoute";
+import AdminLayout from "./components/AdminLayout";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
-import useCart from "./hooks/useCart";
-
-const KEY = "forme-preloaded";
+import About from "./pages/About";
+import Lookbook from "./pages/Lookbook";
+import Login from "./pages/admin/Login";
+import AdminProducts from "./pages/admin/AdminProducts";
+import ProductEditor from "./pages/admin/ProductEditor";
+import Product from "./pages/Product";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
+import AdminOrders from "./pages/admin/AdminOrders";
+import OrderDetail from "./pages/admin/OrderDetail";
 
 export default function App() {
-  const { count, openCart } = useCart();
-
-  const [loading, setLoading] = useState(() => {
-    try {
-      return !sessionStorage.getItem(KEY);
-    } catch {
-      return true;
-    }
-  });
-
-  const handleDone = useCallback(() => {
-    try {
-      sessionStorage.setItem(KEY, "1");
-    } catch {
-      /* storage unavailable, fine */
-    }
-    setLoading(false);
-  }, []);
-
   return (
     <>
-      {loading && <Preloader onDone={handleDone} />}
       <ScrollToTop />
 
-      <AnnouncementBar />
-      <Navbar bagCount={count} onBagClick={openCart} />
-      <CartDrawer />
-
-      <main>
-        <Routes>
+      <Routes>
+        {/* storefront */}
+        <Route element={<StorefrontLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
-        </Routes>
-      </main>
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/product/:slug" element={<Product />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/lookbook" element={<Lookbook />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+        </Route>
 
-      <Footer />
+        {/* admin */}
+        <Route path="/admin/login" element={<Login />} />
+        <Route element={<AdminRoute />}>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<Navigate to="/admin/products" replace />} />
+            <Route path="/admin/products" element={<AdminProducts />} />
+            <Route path="/admin/products" element={<AdminProducts />} />
+            <Route path="/admin/products/new" element={<ProductEditor />} />
+            <Route path="/admin/products/:id" element={<ProductEditor />} />
+            <Route path="/admin/orders" element={<AdminOrders />} />
+            <Route path="/admin/orders/:id" element={<OrderDetail />} />
+          </Route>
+        </Route>
+      </Routes>
     </>
   );
 }

@@ -20,7 +20,7 @@ export default function Hero() {
 
       {/* copy */}
       <div className="hero__copy">
-        <p className="hand hero__note">forme / ss26 — the first edit</p>
+        <p className="hand hero__note">forme / fm26 — the first edit</p>
 
         <h1 className="display hero__title">
           made for the

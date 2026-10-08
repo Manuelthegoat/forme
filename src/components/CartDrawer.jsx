@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import Placeholder from "./Placeholder";
 import Button from "./Button";
-import { formatPrice } from "../data/products";
+import { formatPrice } from "../lib/products";
 import "./CartDrawer.css";
+import { startCheckout } from "../lib/checkout";
 
 const FREE_SHIPPING_AT = 150;
 
@@ -12,6 +13,20 @@ export default function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, setQty, removeItem } =
     useCart();
   const closeRef = useRef(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleCheckout = async () => {
+    setBusy(true);
+    setError("");
+    try {
+      const url = await startCheckout(items);
+      window.location.assign(url);
+    } catch (err) {
+      setError(err.message);
+      setBusy(false);
+    }
+  };
 
   // escape to close + lock scroll + focus the close button
   useEffect(() => {
@@ -117,6 +132,7 @@ export default function CartDrawer() {
                         <button
                           type="button"
                           onClick={() => setQty(item.key, item.qty + 1)}
+                          disabled={item.qty >= (item.maxQty ?? 10)}
                           aria-label={`Increase ${item.name}`}
                         >
                           +
@@ -149,10 +165,17 @@ export default function CartDrawer() {
               <Button
                 variant="chrome"
                 className="cart__checkout"
-                onClick={() => console.log("checkout", items)}
+                disabled={busy}
+                onClick={handleCheckout}
               >
-                Check out
+                {busy ? "Redirecting…" : "Check out"}
               </Button>
+
+              {error && (
+                <p className="cart__error mono" role="alert">
+                  {error}
+                </p>
+              )}
 
               <p className="cart__note">
                 Pay in instalments with Klarna or Clearpay.

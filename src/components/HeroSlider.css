@@ -1,0 +1,179 @@
+.slider {
+  position: relative;
+  height: calc(100svh - 110px);
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--ink);
+  transition: color 0.6s var(--ease);
+}
+
+.slider[data-tone="light"] {
+  color: #fff;
+}
+
+/* ---------- slides ---------- */
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s var(--ease);
+}
+
+.slide--on {
+  z-index: 1;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide__media {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.06);
+  transition: transform 7s linear;
+}
+
+.slide--on .slide__media {
+  transform: none;
+}
+
+.slide__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide__media .placeholder {
+  position: absolute;
+  inset: 0;
+}
+
+.slide__media .placeholder svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- copy ---------- */
+.slide__copy {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  color: var(--ink);
+}
+
+.slide[data-tone="light"] .slide__copy {
+  color: #fff;
+}
+
+.slide__title {
+  max-width: 11ch;
+  font-size: clamp(48px, 9vw, 140px);
+}
+
+.slide__copy > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.slide--on .slide__copy > * {
+  opacity: 1;
+  transform: none;
+}
+
+.slide--on .slide__copy > :nth-child(1) {
+  transition-delay: 0.35s;
+}
+.slide--on .slide__copy > :nth-child(2) {
+  transition-delay: 0.5s;
+}
+.slide--on .slide__copy > :nth-child(3) {
+  transition-delay: 0.7s;
+}
+
+/* ---------- controls ---------- */
+.slider__controls {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.slider__dots {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  display: flex;
+  align-items: center;
+  width: 56px;
+  height: 24px;
+}
+
+.dot span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.dot--on span {
+  opacity: 1;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: slide-fill linear forwards;
+}
+
+.slider--paused .dot--on span {
+  animation-play-state: paused;
+}
+
+@keyframes slide-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.slider__nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.slider__nav button:hover {
+  opacity: 0.6;
+}
+
+/* reduced motion: no autoplay, so show the active dot as full */
+@media (prefers-reduced-motion: reduce) {
+  .dot--on span {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .slide__copy {
+    bottom: 100px;
+  }
+  .dot {
+    width: 36px;
+  }
+  .slider__nav span {
+    display: none;
+  }
+}

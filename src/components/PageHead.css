@@ -1,0 +1,12 @@
+.page-head {
+  padding-block: clamp(40px, 6vw, 80px) clamp(28px, 4vw, 48px);
+}
+
+.page-head__title {
+  font-size: clamp(44px, 8vw, 120px);
+}
+
+.page-head__note {
+  margin-top: 8px;
+  color: var(--smoke);
+}

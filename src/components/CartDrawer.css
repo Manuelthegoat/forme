@@ -200,3 +200,15 @@
   width: 100%;
   padding-block: 16px;
 }
+.qty button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.cart__error {
+  color: var(--red);
+}
+
+.cart__checkout:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}

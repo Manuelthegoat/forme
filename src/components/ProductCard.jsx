@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Placeholder from "./Placeholder";
-import { formatPrice } from "../data/products";
+import { formatPrice } from "../lib/products";
 import "./ProductCard.css";
 
 export default function ProductCard({ product, onQuickAdd = () => {} }) {
-  const { slug, name, price, tag, colors, images } = product;
+  const { slug, name, price, tag, colors, images, soldOut } = product;
   const [main, hover] = images;
 
   return (
@@ -35,13 +35,15 @@ export default function ProductCard({ product, onQuickAdd = () => {} }) {
 
         {tag && <span className="card__tag mono">{tag}</span>}
 
-        <button
-          type="button"
-          className="card__quick mono"
-          onClick={() => onQuickAdd(product)}
-        >
-          Quick add
-        </button>
+        {!soldOut && (
+          <button
+            type="button"
+            className="card__quick mono"
+            onClick={() => onQuickAdd(product)}
+          >
+            Quick add
+          </button>
+        )}
       </div>
 
       <Link to={`/product/${slug}`} className="card__info">

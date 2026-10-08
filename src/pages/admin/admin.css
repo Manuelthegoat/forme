@@ -1,0 +1,272 @@
+.admin-center {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* ---------- login ---------- */
+.login {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.login__title {
+  font-size: clamp(36px, 8vw, 56px);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  color: var(--smoke);
+}
+
+.field input {
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  outline: 0;
+}
+
+.field input:focus {
+  border-bottom-color: var(--red);
+}
+
+.login__error {
+  color: var(--red);
+}
+
+.login .btn {
+  align-self: flex-start;
+}
+
+.login .btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+/* ---------- shell ---------- */
+.admin-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+  padding: 16px var(--gutter);
+  border-bottom: 1px solid var(--chrome);
+}
+
+.admin-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-bar__nav {
+  display: flex;
+  gap: 22px;
+  margin-right: auto;
+}
+
+.admin-bar__nav a {
+  font-weight: 500;
+}
+
+.admin-bar__nav a.active {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.admin-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.admin-bar__user {
+  color: var(--smoke);
+}
+
+.admin-bar__right a:hover,
+.admin-bar__right button:hover {
+  color: var(--red);
+}
+
+.admin-main {
+  padding: 40px var(--gutter) 80px;
+}
+
+.admin-title {
+  margin-bottom: 8px;
+  font-size: clamp(32px, 5vw, 64px);
+}
+
+.admin-sub {
+  margin-bottom: 28px;
+  color: var(--smoke);
+}
+
+/* ---------- table ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--chrome);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--chrome);
+}
+
+.table th {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid var(--chrome);
+  border-radius: var(--radius-pill);
+}
+
+.badge--on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.admin-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mini {
+  width: 36px;
+  aspect-ratio: 3 / 4;
+  background: var(--panel);
+}
+
+.mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+button.badge {
+  cursor: pointer;
+}
+.admin-chips {
+  margin-bottom: 24px;
+}
+
+.admin-muted {
+  color: var(--smoke);
+}
+
+.admin-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.badge--warn {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ---------- order detail ---------- */
+.order-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(20px, 4vw, 48px);
+  align-items: start;
+  margin-top: 24px;
+}
+
+.order-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--chrome);
+}
+
+.card-box h2 {
+  font-weight: 400;
+  color: var(--smoke);
+}
+
+.card-box select {
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  outline: 0;
+}
+
+.card-box .table-wrap {
+  border: 0;
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.totals div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totals dd {
+  margin: 0;
+}
+
+.totals__sum {
+  padding-top: 10px;
+  border-top: 1px solid var(--chrome);
+  font-weight: 700;
+}
+
+.addr {
+  font-style: normal;
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .order-grid {
+    grid-template-columns: 1fr;
+  }
+}

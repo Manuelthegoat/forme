@@ -18,11 +18,14 @@ function reducer(state, action) {
     case "add": {
       const { product, size } = action;
       const key = `${product.id}-${size}`;
+      const limit = Math.min(product.stock?.[size] ?? MAX_QTY, MAX_QTY);
       const existing = state.find((i) => i.key === key);
 
       if (existing) {
         return state.map((i) =>
-          i.key === key ? { ...i, qty: Math.min(i.qty + 1, MAX_QTY) } : i
+          i.key === key
+            ? { ...i, maxQty: limit, qty: Math.min(i.qty + 1, limit) }
+            : i
         );
       }
 
@@ -38,6 +41,7 @@ function reducer(state, action) {
           image: product.images?.[0] ?? null,
           size,
           qty: 1,
+          maxQty: limit,
         },
       ];
     }
@@ -46,7 +50,7 @@ function reducer(state, action) {
       return state
         .map((i) =>
           i.key === action.key
-            ? { ...i, qty: Math.min(action.qty, MAX_QTY) }
+            ? { ...i, qty: Math.min(action.qty, i.maxQty ?? MAX_QTY) }
             : i
         )
         .filter((i) => i.qty > 0);

@@ -1,13 +1,27 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import useScrolled from "../hooks/useScrolled";
+import { hero } from "../data/hero";
 import "./Navbar.css";
 
-export default function Navbar({ bagCount = 2, onBagClick }) {
+export default function Navbar({ bagCount = 0, onBagClick }) {
   const scrolled = useScrolled();
+  const { pathname } = useLocation();
+
+  // transparent over the hero on the home page, until you scroll
+  const over = pathname === "/" && !scrolled;
+
+  const cls = [
+    "nav",
+    scrolled && "nav--scrolled",
+    over && "nav--over",
+    over && hero.tone === "light" && "nav--light",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
+    <header className={cls}>
       <nav className="nav__side nav__side--left" aria-label="Main">
         <NavLink to="/shop">Shop</NavLink>
         <NavLink to="/lookbook">Lookbook</NavLink>

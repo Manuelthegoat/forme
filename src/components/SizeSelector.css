@@ -1,0 +1,32 @@
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.size {
+  min-width: 52px;
+  padding: 12px 14px;
+  border: 1px solid var(--chrome);
+  border-radius: var(--radius-pill);
+  text-align: center;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.size:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.size--on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.size--out {
+  color: var(--smoke);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.55;
+}

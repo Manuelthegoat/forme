@@ -1,0 +1,110 @@
+.hero-img {
+  --nav-h: 70px; /* height of the navbar at the top of the page */
+  --shade: 0, 0, 0;
+
+  position: relative;
+  height: calc(100svh - 36px); /* minus the announcement bar */
+  min-height: 560px;
+  margin-top: calc(var(--nav-h) * -1); /* slides up behind the navbar */
+  overflow: hidden;
+  background: var(--ink);
+  color: #fff;
+}
+
+.hero-img[data-tone="dark"] {
+  --shade: 244, 243, 240;
+  color: var(--ink);
+}
+
+/* ---------- image ---------- */
+.hero-img__media {
+  position: absolute;
+  inset: 0;
+  animation: hero-in 2.4s var(--ease) both;
+}
+
+.hero-img__media picture,
+.hero-img__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-img__media img {
+  object-fit: cover;
+  object-position: var(--focus, 50% 30%);
+}
+
+.hero-img__media .placeholder {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-img__media .placeholder svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* soft shade at the top (for the nav) and bottom (for the text) */
+.hero-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--shade), 0.4),
+    transparent 28%,
+    transparent 50%,
+    rgba(var(--shade), 0.5)
+  );
+}
+
+@keyframes hero-in {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* ---------- copy ---------- */
+.hero-img__copy {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.hero-img__title {
+  max-width: 11ch;
+  font-size: clamp(48px, 10vw, 160px);
+}
+
+.hero-img__copy > * {
+  animation: hero-up 1s var(--ease) both;
+}
+.hero-img__copy > :nth-child(1) {
+  animation-delay: 0.3s;
+}
+.hero-img__copy > :nth-child(2) {
+  animation-delay: 0.45s;
+}
+.hero-img__copy > :nth-child(3) {
+  animation-delay: 0.65s;
+}
+
+@keyframes hero-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}

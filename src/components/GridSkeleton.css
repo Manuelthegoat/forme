@@ -1,0 +1,27 @@
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--panel) 25%,
+    #f1efeb 50%,
+    var(--panel) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.skeleton--img {
+  aspect-ratio: 3 / 4;
+  border-radius: 2px;
+}
+
+.skeleton--line {
+  width: 60%;
+  height: 14px;
+  margin-top: 14px;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

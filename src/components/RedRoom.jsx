@@ -15,7 +15,7 @@ export default function RedRoom({ video }) {
           </h2>
           <p className="red__text">
             Our roll-out film: dark, heels, one pole, no faces. Arriving with
-            the SS26 drop.
+            the fm26 drop.
           </p>
           <Button href="#" variant="light">
             Watch the teaser

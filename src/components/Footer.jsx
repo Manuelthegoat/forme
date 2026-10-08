@@ -16,7 +16,7 @@ const COLUMNS = [
     links: [
       { label: "About", to: "/about" },
       { label: "Lookbook", to: "/lookbook" },
-      { label: "The red room", to: "/#film" },
+      { label: "The red room", to: "/lookbook#film" },
     ],
   },
   {
