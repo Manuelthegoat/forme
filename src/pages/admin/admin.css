@@ -172,6 +172,8 @@
 }
 
 .mini img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -345,7 +347,10 @@ button.badge {
 .table td:last-child, .table th:last-child { padding-right: 20px; }
 .table a { text-decoration: underline; text-decoration-color: #c7c4be; text-underline-offset: 4px; }
 .table a:hover { color: var(--red); text-decoration-color: currentColor; }
-.mini { width: 40px; border-radius: 2px; background: #e7e5e0; }
+.mini {
+  position: relative;
+  width: 40px; border-radius: 2px; background: #e7e5e0;
+  overflow: hidden; }
 .badge { padding: 5px 10px; border-color: #d7d5cf; background: #f6f5f2; font-size: 9px; letter-spacing: .06em; }
 button.badge:hover { border-color: var(--ink); }
 .badge--on { background: #232327; color: #fff; }
@@ -512,3 +517,9 @@ button.badge:hover { border-color: var(--ink); }
   .pform__row { grid-template-columns: minmax(0, 1fr); }
   .login { padding: 24px 18px; }
 }
+
+.mini {
+  position: relative;
+  overflow: hidden;
+}
+
