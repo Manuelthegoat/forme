@@ -17,6 +17,7 @@ export default function AdminLayout() {
        <nav className="admin-bar__nav" aria-label="Admin">
   <NavLink to="/admin/products">Products</NavLink>
   <NavLink to="/admin/orders">Orders</NavLink>
+  <NavLink to="/admin/sales">Sales</NavLink>
 </nav>
 
         <div className="admin-bar__right mono">
