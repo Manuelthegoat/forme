@@ -479,3 +479,36 @@ button.badge:hover { border-color: var(--ink); }
   background: transparent;
   box-shadow: none;
 }
+
+/* Responsive corrections */
+.admin-head > .button { margin-bottom: 0; }
+.admin-main, .admin-bar, .admin-bar > *, .order-grid > *, .pform, .pform__col { min-width: 0; }
+.admin-bar__right { min-width: 0; }
+@media (max-width: 960px) {
+  .admin-bar { position: relative; flex-wrap: wrap; gap: 10px 14px; }
+  .admin-bar__nav { order: 3; width: 100%; margin: 0; }
+  .admin-bar__nav a.active::before { bottom: -3px; }
+  .admin-bar__right { margin-left: auto; }
+}
+@media (max-width: 760px) {
+  .admin-main { padding: 30px var(--gutter) 64px; }
+  .admin-head { align-items: flex-start; }
+  .admin-head > .button { margin: 0; }
+  .table-wrap { max-width: 100%; }
+  .card-box { padding: 18px; }
+  .admin-center { padding: 10vh 18px 36px; }
+}
+@media (max-width: 520px) {
+  .admin-main { padding-inline: 16px; }
+  .admin-bar { padding-inline: 16px; }
+  .admin-bar__nav { overflow-x: auto; }
+  .admin-head { gap: 14px; }
+  .admin-head > .button { padding: 12px 14px; font-size: 9px; }
+  .table { min-width: 680px; }
+  .card-box .table { min-width: 500px; }
+  .order-grid { min-width: 0; }
+  .pform__col { padding: 16px 12px; }
+  .pform__sizes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pform__row { grid-template-columns: minmax(0, 1fr); }
+  .login { padding: 24px 18px; }
+}
