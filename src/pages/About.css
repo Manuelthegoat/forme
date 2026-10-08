@@ -241,7 +241,8 @@
   }
 
   .about-intro__image {
-    min-height: 520px;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
   }
 
   .about-viewpoint__inner {
@@ -287,8 +288,9 @@
   }
 
   .about-intro__image {
-    min-height: 125vw;
-    max-height: 620px;
+    height: min(112vw, 440px);
+    min-height: 0;
+    aspect-ratio: auto;
   }
 
   .about-viewpoint__inner {

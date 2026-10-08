@@ -3,6 +3,7 @@
   padding-top: clamp(28px, 4vw, 48px);
   padding-bottom: clamp(48px, 8vw, 100px);
 }
+
 .checkout-success__topline,
 .checkout-success__art-top,
 .checkout-success__art-bottom {
@@ -13,10 +14,12 @@
   font-size: 10px;
   letter-spacing: .12em;
 }
+
 .checkout-success__topline {
   padding-bottom: 18px;
   border-bottom: 1px solid rgba(22, 22, 26, .2);
 }
+
 .checkout-success__body {
   display: grid;
   grid-template-columns: 1fr minmax(320px, .82fr);
@@ -24,7 +27,11 @@
   gap: clamp(40px, 8vw, 120px);
   padding-top: clamp(46px, 7vw, 88px);
 }
-.checkout-success__message { max-width: 590px; }
+
+.checkout-success__message {
+  max-width: 590px;
+}
+
 .checkout-success__stamp {
   display: inline-flex;
   align-items: center;
@@ -37,6 +44,7 @@
   text-transform: uppercase;
   letter-spacing: .06em;
 }
+
 .checkout-success__stamp svg {
   width: 19px;
   height: 19px;
@@ -49,13 +57,47 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.checkout-success__eyebrow { margin-bottom: 14px; color: var(--red); font-size: 11px; letter-spacing: .18em; }
-.checkout-success__title { font-size: clamp(76px, 12vw, 164px); line-height: .76; letter-spacing: -.075em; }
-.checkout-success__title > span { display: inline-block; margin-top: .12em; }
-.checkout-success__period { color: var(--red); }
-.checkout-success__note { max-width: 360px; margin-top: 32px; color: #66635f; font-size: 15px; line-height: 1.75; }
-.checkout-success__button { margin-top: 28px; }
-.checkout-success__button span { display: inline-block; margin-left: 12px; font-size: 16px; }
+
+.checkout-success__eyebrow {
+  margin-bottom: 14px;
+  color: var(--red);
+  font-size: 11px;
+  letter-spacing: .18em;
+}
+
+.checkout-success__title {
+  font-size: clamp(76px, 12vw, 164px);
+  line-height: .76;
+  letter-spacing: -.075em;
+}
+
+.checkout-success__title>span {
+  display: inline-block;
+  margin-top: .12em;
+}
+
+.checkout-success__period {
+  color: var(--red);
+}
+
+.checkout-success__note {
+  max-width: 360px;
+  margin-top: 32px;
+  color: #66635f;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.checkout-success__button {
+  margin-top: 28px;
+}
+
+.checkout-success__button span {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 16px;
+}
+
 .checkout-success__art {
   position: relative;
   display: grid;
@@ -65,29 +107,127 @@
   background: var(--red);
   color: var(--paper);
 }
+
 .checkout-success__art-top,
-.checkout-success__art-bottom { position: absolute; z-index: 2; right: 24px; left: 24px; font-size: 9px; }
-.checkout-success__art-top { top: 22px; }
-.checkout-success__art-bottom { bottom: 22px; }
-.checkout-success__art-bottom span:last-child { font-size: 15px; }
-.checkout-success__orbit { position: absolute; border: 1px solid rgba(244, 243, 240, .4); border-radius: 50%; }
-.checkout-success__orbit--outer { width: 76%; aspect-ratio: 1; }
-.checkout-success__orbit--inner { width: 58%; aspect-ratio: 1; border-style: dashed; animation: success-spin 32s linear infinite; }
-.checkout-success__check { display: grid; width: 34%; aspect-ratio: 1; place-items: center; border-radius: 50%; background: var(--paper); color: var(--red); box-shadow: 0 18px 60px rgba(52, 0, 0, .2); }
-.checkout-success__check svg { width: 54%; fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-.checkout-success__spark { position: absolute; color: var(--paper); }
-.checkout-success__spark--one { top: 25%; right: 20%; font-size: 34px; }
-.checkout-success__spark--two { bottom: 26%; left: 18%; font-size: 22px; }
-.checkout-success__art-caption { position: absolute; right: 8%; bottom: 16%; font-size: clamp(28px, 4vw, 42px); transform: rotate(-9deg); }
-@keyframes success-spin { to { transform: rotate(360deg); } }
-@media (max-width: 760px) {
-  .checkout-success { min-height: auto; }
-  .checkout-success__body { grid-template-columns: 1fr; gap: 44px; padding-top: 42px; }
-  .checkout-success__stamp { margin-bottom: 34px; }
-  .checkout-success__title { font-size: clamp(84px, 21vw, 140px); }
-  .checkout-success__note { margin-top: 26px; }
-  .checkout-success__art { min-height: min(112vw, 460px); }
+.checkout-success__art-bottom {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  left: 24px;
+  font-size: 9px;
 }
+
+.checkout-success__art-top {
+  top: 22px;
+}
+
+.checkout-success__art-bottom {
+  bottom: 22px;
+}
+
+.checkout-success__art-bottom span:last-child {
+  font-size: 15px;
+}
+
+.checkout-success__orbit {
+  position: absolute;
+  border: 1px solid rgba(244, 243, 240, .4);
+  border-radius: 50%;
+}
+
+.checkout-success__orbit--outer {
+  width: 76%;
+  aspect-ratio: 1;
+}
+
+.checkout-success__orbit--inner {
+  width: 58%;
+  aspect-ratio: 1;
+  border-style: dashed;
+  animation: success-spin 32s linear infinite;
+}
+
+.checkout-success__check {
+  display: grid;
+  width: 34%;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--red);
+  box-shadow: 0 18px 60px rgba(52, 0, 0, .2);
+}
+
+.checkout-success__check svg {
+  width: 54%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.checkout-success__spark {
+  position: absolute;
+  color: var(--paper);
+}
+
+.checkout-success__spark--one {
+  top: 25%;
+  right: 20%;
+  font-size: 34px;
+}
+
+.checkout-success__spark--two {
+  bottom: 26%;
+  left: 18%;
+  font-size: 22px;
+}
+
+.checkout-success__art-caption {
+  position: absolute;
+  right: 8%;
+  bottom: 16%;
+  font-size: clamp(28px, 4vw, 42px);
+  transform: rotate(-9deg);
+}
+
+@keyframes success-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .checkout-success {
+    min-height: auto;
+  }
+
+  .checkout-success__body {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding-top: 42px;
+  }
+
+  .checkout-success__stamp {
+    margin-bottom: 34px;
+  }
+
+  .checkout-success__title {
+    font-size: clamp(84px, 21vw, 140px);
+  }
+
+  .checkout-success__note {
+    margin-top: 26px;
+  }
+
+  .checkout-success__art {
+    min-height: min(112vw, 460px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .checkout-success__orbit--inner { animation: none; }
+  .checkout-success__orbit--inner {
+    animation: none;
+  }
 }

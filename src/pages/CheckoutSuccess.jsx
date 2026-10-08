@@ -19,7 +19,7 @@ export default function CheckoutSuccess() {
     <section className="checkout-success wrap">
       <div className="checkout-success__topline mono">
         <span>FORME / CHECKOUT</span>
-        <span>01 — ORDER COMPLETE</span>
+        <span>ORDER COMPLETE</span>
       </div>
       <div className="checkout-success__body">
         <div className="checkout-success__message">
