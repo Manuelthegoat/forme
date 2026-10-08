@@ -61,5 +61,4 @@ export async function fetchProductBySlug(slug) {
 export const firstInStockSize = (product) =>
   SIZE_ORDER.find((s) => (product.stock?.[s] ?? 0) > 0) ?? null;
 
-export const formatPrice = (n) =>
-  Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
+export { formatPrice } from "./currency";

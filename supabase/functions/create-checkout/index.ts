@@ -9,9 +9,7 @@ const db = createClient(
 
 // ---- edit these ----
 const SITE_URL = (Deno.env.get("SITE_URL") ?? "http://localhost:5173").replace(/\/$/, "");
-const CURRENCY = "usd";
-const FREE_SHIPPING_CENTS = 15000; // free over $150
-const FLAT_SHIPPING_CENTS = 1200; // otherwise $12 (placeholder, confirm with the client)
+
 const COUNTRIES = ["US", "GB", "CA", "AU", "DE", "FR", "NG"] as const; // where FORME ships
 // --------------------
 
@@ -100,8 +98,21 @@ Deno.serve(async (req) => {
     checked.push({ ...l, name: p.name as string, price: p.price_cents as number });
   }
 
-  const subtotal = checked.reduce((n, l) => n + l.price * l.qty, 0);
-  const shipping = subtotal >= FREE_SHIPPING_CENTS ? 0 : FLAT_SHIPPING_CENTS;
+  const { data: settings, error: sErr } = await db
+  .from("settings")
+  .select("currency, free_shipping_cents, flat_shipping_cents")
+  .eq("id", 1)
+  .single();
+
+if (sErr || !settings) {
+  console.error(sErr);
+  return json({ error: "Couldn't start checkout. Please try again." }, 500);
+}
+
+const CURRENCY = String(settings.currency).toLowerCase();
+const subtotal = checked.reduce((n, l) => n + l.price * l.qty, 0);
+const shipping =
+  subtotal >= settings.free_shipping_cents ? 0 : settings.flat_shipping_cents;
 
   // pending order
   const { data: order, error: oErr } = await db

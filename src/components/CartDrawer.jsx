@@ -6,12 +6,14 @@ import Button from "./Button";
 import { formatPrice } from "../lib/products";
 import "./CartDrawer.css";
 import { startCheckout } from "../lib/checkout";
+import useSettings from "../hooks/useSettings";
 
-const FREE_SHIPPING_AT = 150;
 
 export default function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, setQty, removeItem } =
     useCart();
+    const { freeShippingCents } = useSettings();
+const freeAt = freeShippingCents / 100;
   const closeRef = useRef(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -45,8 +47,8 @@ export default function CartDrawer() {
     };
   }, [isOpen, closeCart]);
 
-  const remaining = Math.max(FREE_SHIPPING_AT - subtotal, 0);
-  const progress = Math.min(subtotal / FREE_SHIPPING_AT, 1);
+const remaining = Math.max(freeAt - subtotal, 0);
+const progress = freeAt > 0 ? Math.min(subtotal / freeAt, 1) : 1;
 
   return (
     <div className={`cart ${isOpen ? "cart--open" : ""}`}>

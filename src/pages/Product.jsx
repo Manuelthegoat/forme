@@ -7,9 +7,11 @@ import useProduct from "../hooks/useProduct";
 import useCart from "../hooks/useCart";
 import { formatPrice } from "../lib/products";
 import "./Product.css";
+import useSettings from "../hooks/useSettings";
 
 function ProductView({ product }) {
   const { addItem } = useCart();
+  const { freeShippingCents } = useSettings();
   const [size, setSize] = useState(null);
 
   const left = size ? product.stock?.[size] ?? 0 : null;
@@ -79,8 +81,11 @@ function ProductView({ product }) {
           <details>
             <summary className="mono">Shipping &amp; returns</summary>
             <p>
-              Free shipping over $150. Taxes and shipping are calculated at
-              checkout. Returns within 14 days, unworn with tags attached.
+              {freeShippingCents > 0
+                ? `Free shipping over ${formatPrice(freeShippingCents / 100)}.`
+                : "Free shipping on all orders."}{" "}
+              Taxes and shipping are calculated at checkout. Returns within 14 days,
+              unworn with tags attached.
             </p>
           </details>
         </div>

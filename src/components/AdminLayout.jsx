@@ -14,11 +14,12 @@ export default function AdminLayout() {
           <span className="mono">Admin</span>
         </Link>
 
-       <nav className="admin-bar__nav" aria-label="Admin">
-  <NavLink to="/admin/products">Products</NavLink>
-  <NavLink to="/admin/orders">Orders</NavLink>
-  <NavLink to="/admin/sales">Sales</NavLink>
-</nav>
+        <nav className="admin-bar__nav" aria-label="Admin">
+          <NavLink to="/admin/products">Products</NavLink>
+          <NavLink to="/admin/orders">Orders</NavLink>
+          <NavLink to="/admin/sales">Sales</NavLink>
+          <NavLink to="/admin/settings">Settings</NavLink>
+        </nav>
 
         <div className="admin-bar__right mono">
           <Link to="/">View store</Link>

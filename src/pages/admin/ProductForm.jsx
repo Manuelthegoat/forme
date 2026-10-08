@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import { SIZE_ORDER } from "../../lib/products";
+import { currencySymbol } from "../../lib/currency";
 import {
   ALLOWED_TYPES,
   uploadProductImage,
@@ -238,7 +239,7 @@ export default function ProductForm({ product }) {
         <div className="pform__row">
           <div className="field">
             <label className="mono" htmlFor="p-price">
-              Price ($)
+             Price ({currencySymbol()})
             </label>
             <input
               id="p-price"
