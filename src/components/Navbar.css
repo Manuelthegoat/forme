@@ -88,3 +88,6 @@
 .nav--light {
   color: #fff;
 }
+.nav--light .nav__logo img {
+  filter: invert(1);
+}

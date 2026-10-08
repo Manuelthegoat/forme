@@ -179,3 +179,46 @@
     grid-template-columns: 1fr;
   }
 }
+/* Admin form refinements */
+.pform { gap: clamp(18px, 3vw, 36px); }
+.pform__col {
+  gap: 24px;
+  padding: clamp(18px, 2.4vw, 30px);
+  border: 1px solid #deddd8;
+  border-radius: 4px;
+  background: #faf9f7;
+  box-shadow: 0 8px 30px rgba(22, 22, 26, .035);
+}
+.pform .field { gap: 8px; }
+.pform__row { gap: 12px; }
+.pform__row .field { min-width: 0; }
+.pform .field input, .pform textarea, .pform select { width: 100%; }
+.pform textarea { min-height: 120px; line-height: 1.6; }
+.pform__stock { padding-top: 18px; border-top: 1px solid #e4e2dd; }
+.pform__stock legend { font-size: 9px; letter-spacing: .1em; }
+.pform__sizes { gap: 8px; }
+.pform__sizes .field input { padding-inline: 8px; text-align: center; }
+.pform__photos-head > .mono { font-size: 9px; letter-spacing: .12em; }
+.pform__upload { border-radius: 3px; background: #232327; color: #fff; }
+.pform__upload:hover { border-color: var(--red); background: var(--red); color: #fff; }
+.pform__hint { line-height: 1.6; }
+.pform__empty { border-color: #d4d2cc; border-radius: 3px; background: #f5f4f1; }
+.pform__grid { gap: 9px; }
+.thumb { border-radius: 3px; background: #e5e3de; }
+.thumb__actions { align-items: center; background: rgba(250, 249, 247, .94); }
+.pform__publish { align-items: center; border-color: #deddd8; border-radius: 3px; background: #f5f4f1; }
+.pform__publish input { width: 17px; height: 17px; accent-color: var(--red); }
+.pform__publish strong { display: block; margin-bottom: 4px; font-size: 13px; }
+.pform__actions { padding-top: 4px; }
+.pform__actions .btn { cursor: pointer; }
+.pform__link, .pform__view { font-size: 10px; }
+.pform__link:hover, .pform__view:hover { color: var(--red); }
+@media (max-width: 860px) {
+  .pform__row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .pform__col { padding: 18px 14px; }
+  .pform__row { grid-template-columns: 1fr; }
+  .pform__sizes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pform__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

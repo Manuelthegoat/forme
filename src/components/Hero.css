@@ -70,7 +70,7 @@
   animation: hero-float 6s ease-in-out infinite;
 }
 
-.hero__logo svg {
+.hero__logo img {
   width: 100%;
   height: auto;
 }
