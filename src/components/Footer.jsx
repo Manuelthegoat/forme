@@ -70,9 +70,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footer__word" aria-hidden="true">
-        FORME
-      </div>
+      <img
+        className="footer__word"
+        src="/src/assets/logo/forme_wordmark_black.png"
+        alt=""
+        aria-hidden="true"
+      />
     </footer>
   );
 }

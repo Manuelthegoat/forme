@@ -1,5 +1,6 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import Logo from "./Logo";
+import logoBlack from "../assets/logo/forme_circle_icon_black.png";
+import logoWhite from "../assets/logo/forme_circle_icon_white.png";
 import useScrolled from "../hooks/useScrolled";
 import { hero } from "../data/hero";
 import "./Navbar.css";
@@ -29,7 +30,13 @@ export default function Navbar({ bagCount = 0, onBagClick }) {
       </nav>
 
       <Link to="/" className="nav__logo" aria-label="FORME home">
-        <Logo size={34} />
+        <img
+          src={over && hero.tone === "light" ? logoWhite : logoBlack}
+          width="34"
+          height="34"
+          alt=""
+          draggable="false"
+        />
       </Link>
 
       <div className="nav__side nav__side--right">

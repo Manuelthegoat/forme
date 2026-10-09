@@ -43,17 +43,11 @@
 .footer__word {
   margin-top: 24px;
   margin-bottom: -0.11em; /* crops the bottom of the letters */
-  font-size: clamp(90px, 26vw, 420px);
-  font-weight: 800;
-  font-stretch: 75%;
-  letter-spacing: -0.04em;
-  line-height: 0.74;
-  text-align: center;
+  display: block;
+  width: 70%;
+  height: auto;
+  margin-inline: auto;
   user-select: none;
-  background: linear-gradient(180deg, #2a2a30, #9a9da3 75%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 @media (max-width: 700px) {
