@@ -26,3 +26,8 @@
   gap: 20px;
   padding-block: 40px;
 }
+@media (max-width: 700px) {
+  .shop .card__media {
+    aspect-ratio: 2 / 3;
+  }
+}
