@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
-import { formatPrice } from "../../lib/products";
+import { formatBasePrice } from "../../lib/currency";
 import Button from "../../components/Button";
 
 const totalStock = (p) =>
@@ -78,7 +78,7 @@ export default function AdminProducts() {
                   </td>
                   <td>{p.name}</td>
                   <td className="mono">{p.category}</td>
-                  <td className="mono">{formatPrice(p.price_cents / 100)}</td>
+                  <td className="mono">{formatBasePrice(p.price_cents / 100)}</td>
                   <td className="mono">{totalStock(p)}</td>
                   <td>
                     <button

@@ -6,6 +6,8 @@ import AdminLayout from "./components/AdminLayout";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
+import ShippingReturns from "./pages/ShippingReturns";
 import Lookbook from "./pages/Lookbook";
 import Login from "./pages/admin/Login";
 import AdminProducts from "./pages/admin/AdminProducts";
@@ -30,6 +32,8 @@ export default function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:slug" element={<Product />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/shipping-returns" element={<ShippingReturns />} />
           <Route path="/lookbook" element={<Lookbook />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
         </Route>

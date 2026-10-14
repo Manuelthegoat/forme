@@ -88,3 +88,40 @@
 .nav--light {
   color: #fff;
 }
+
+.nav__country {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav__country select {
+  max-width: 112px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
+  padding: 3px 16px 3px 0;
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.nav__country option {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+@media (max-width: 520px) {
+  .nav__side--right {
+    gap: 10px;
+  }
+
+  .nav__side--right > button:first-of-type {
+    display: none;
+  }
+
+  .nav__country select {
+    max-width: 86px;
+    font-size: 11px;
+  }
+}

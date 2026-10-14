@@ -10,7 +10,9 @@ const db = createClient(
 // ---- edit these ----
 const SITE_URL = (Deno.env.get("SITE_URL") ?? "http://localhost:5173").replace(/\/$/, "");
 
-const COUNTRIES = ["US", "GB", "CA", "AU", "DE", "FR", "NG"] as const; // where FORME ships
+const COUNTRY_CURRENCIES: Record<string, string> = {
+  US: "USD", GB: "GBP", CA: "CAD", AU: "AUD", DE: "EUR", FR: "EUR", NG: "NGN",
+};
 // --------------------
 
 const SIZES = ["XS", "S", "M", "L", "XL"];
@@ -38,6 +40,10 @@ Deno.serve(async (req) => {
   } catch {
     return json({ error: "Invalid request." }, 400);
   }
+
+  const country = String(body?.country ?? "");
+  const targetCurrency = COUNTRY_CURRENCIES[country];
+  if (!targetCurrency) return json({ error: "Choose a supported shipping country." }, 400);
 
   const raw = Array.isArray(body?.items) ? body.items : [];
   if (raw.length === 0 || raw.length > 30) {
@@ -109,10 +115,33 @@ if (sErr || !settings) {
   return json({ error: "Couldn't start checkout. Please try again." }, 500);
 }
 
-const CURRENCY = String(settings.currency).toLowerCase();
+const STORE_CURRENCY = String(settings.currency).toUpperCase();
+const CURRENCY = targetCurrency.toLowerCase();
+const subtotalBase = checked.reduce((n, l) => n + l.price * l.qty, 0);
+let exchangeRate = 1;
+if (STORE_CURRENCY !== targetCurrency) {
+  try {
+    const rateResponse = await fetch(
+      `https://api.frankfurter.dev/v2/rate/${STORE_CURRENCY.toLowerCase()}/${targetCurrency.toLowerCase()}`,
+    );
+    if (!rateResponse.ok) throw new Error("Exchange rate request failed.");
+    const rateData = await rateResponse.json();
+    exchangeRate = Number(rateData.rate);
+    if (rateData.base?.toUpperCase() !== STORE_CURRENCY || rateData.quote?.toUpperCase() !== targetCurrency || !Number.isFinite(exchangeRate) || exchangeRate <= 0) {
+      throw new Error("Invalid exchange rate response.");
+    }
+  } catch (err) {
+    console.error(err);
+    return json({ error: "Couldn't convert prices right now. Please try again." }, 503);
+  }
+}
+
+const convertCents = (amount: number) => Math.round(amount * exchangeRate);
+for (const line of checked) line.price = convertCents(line.price);
 const subtotal = checked.reduce((n, l) => n + l.price * l.qty, 0);
-const shipping =
-  subtotal >= settings.free_shipping_cents ? 0 : settings.flat_shipping_cents;
+const shipping = convertCents(
+  subtotalBase >= settings.free_shipping_cents ? 0 : settings.flat_shipping_cents,
+);
 
   // pending order
   const { data: order, error: oErr } = await db
@@ -159,7 +188,7 @@ const shipping =
           product_data: { name: `${l.name} — ${l.size}` },
         },
       })),
-      shipping_address_collection: { allowed_countries: [...COUNTRIES] },
+      shipping_address_collection: { allowed_countries: [country] },
       shipping_options: [
         {
           shipping_rate_data: {

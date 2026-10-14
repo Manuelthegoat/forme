@@ -1,5 +1,4 @@
-// Two-decimal currencies only. Zero-decimal ones (JPY, KRW...) are priced
-// differently in Stripe and would need extra handling.
+// Supported currencies and locales for the FORME shipping destinations.
 export const CURRENCIES = [
   { code: "USD", label: "US dollar ($)", locale: "en-US" },
   { code: "GBP", label: "British pound (£)", locale: "en-GB" },
@@ -9,32 +8,59 @@ export const CURRENCIES = [
   { code: "NGN", label: "Nigerian naira (₦)", locale: "en-NG" },
 ];
 
-const localeFor = (code) =>
-  CURRENCIES.find((c) => c.code === code)?.locale ?? "en-US";
+export const STORE_COUNTRIES = [
+  { code: "US", name: "United States", currency: "USD", locale: "en-US" },
+  { code: "GB", name: "United Kingdom", currency: "GBP", locale: "en-GB" },
+  { code: "CA", name: "Canada", currency: "CAD", locale: "en-CA" },
+  { code: "AU", name: "Australia", currency: "AUD", locale: "en-AU" },
+  { code: "DE", name: "Germany", currency: "EUR", locale: "de-DE" },
+  { code: "FR", name: "France", currency: "EUR", locale: "fr-FR" },
+  { code: "NG", name: "Nigeria", currency: "NGN", locale: "en-NG" },
+];
 
-// set once when the settings load, before the pages render
-let currency = "USD";
+const localeFor = (code) => CURRENCIES.find((item) => item.code === code)?.locale ?? "en-US";
+
+let storeCurrency = "USD";
+let displayCurrency = "USD";
+let displayLocale = "en-US";
+let exchangeRate = 1;
+
 export const setStoreCurrency = (code) => {
-  currency = code;
+  storeCurrency = code;
+  displayCurrency = code;
+  displayLocale = localeFor(code);
+  exchangeRate = 1;
 };
-export const getStoreCurrency = () => currency;
 
-export function formatPrice(n) {
-  const whole = Number.isInteger(n);
-  return new Intl.NumberFormat(localeFor(currency), {
+export const setDisplayCurrency = (country, rate) => {
+  displayCurrency = country.currency;
+  displayLocale = country.locale;
+  exchangeRate = rate;
+};
+
+export const getStoreCurrency = () => storeCurrency;
+export const getDisplayCurrency = () => displayCurrency;
+
+export function formatPrice(amount, currency = displayCurrency, locale = displayLocale) {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
-    minimumFractionDigits: whole ? 0 : 2,
     maximumFractionDigits: 2,
-  }).format(n);
+  }).format(amount * exchangeRate);
 }
 
-export function currencySymbol(code = currency) {
+export function formatBasePrice(amount) {
+  return new Intl.NumberFormat(localeFor(storeCurrency), {
+    style: "currency",
+    currency: storeCurrency,
+    maximumFractionDigits: 2,
+  }).format(amount);
+}
+
+export function currencySymbol(code = storeCurrency) {
   const part = new Intl.NumberFormat(localeFor(code), {
     style: "currency",
     currency: code,
-  })
-    .formatToParts(0)
-    .find((p) => p.type === "currency");
+  }).formatToParts(0).find((item) => item.type === "currency");
   return part?.value ?? code;
 }

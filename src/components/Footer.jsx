@@ -22,9 +22,9 @@ const COLUMNS = [
   {
     title: "Help",
     links: [
-      { label: "Shipping", to: "/" },
-      { label: "Returns", to: "/" },
-      { label: "Contact", to: "/" },
+      { label: "Shipping", to: "/shipping-returns#shipping" },
+      { label: "Returns", to: "/shipping-returns#returns" },
+      { label: "Contact", to: "/contact" },
     ],
   },
 ];

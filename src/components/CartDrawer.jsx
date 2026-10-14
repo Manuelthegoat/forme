@@ -12,7 +12,7 @@ import useSettings from "../hooks/useSettings";
 export default function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, setQty, removeItem } =
     useCart();
-    const { freeShippingCents } = useSettings();
+    const { freeShippingCents, country } = useSettings();
 const freeAt = freeShippingCents / 100;
   const closeRef = useRef(null);
   const [busy, setBusy] = useState(false);
@@ -22,7 +22,7 @@ const freeAt = freeShippingCents / 100;
     setBusy(true);
     setError("");
     try {
-      const url = await startCheckout(items);
+      const url = await startCheckout(items, country);
       window.location.assign(url);
     } catch (err) {
       setError(err.message);

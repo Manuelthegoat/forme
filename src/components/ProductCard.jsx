@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import Placeholder from "./Placeholder";
 import { formatPrice } from "../lib/products";
+import useSettings from "../hooks/useSettings";
 import "./ProductCard.css";
 
 export default function ProductCard({ product, onQuickAdd = () => {} }) {
+  const { displayCurrency } = useSettings();
   const { slug, name, price, tag, colors, images, soldOut } = product;
   const [main, hover] = images;
 
@@ -48,7 +50,7 @@ export default function ProductCard({ product, onQuickAdd = () => {} }) {
 
       <Link to={`/product/${slug}`} className="card__info">
         <span>{name}</span>
-        <span className="mono">{formatPrice(price)}</span>
+        <span className="mono">{formatPrice(price, displayCurrency)}</span>
       </Link>
     </article>
   );

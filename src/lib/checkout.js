@@ -1,8 +1,9 @@
 import { supabase } from "./supabase";
 
-export async function startCheckout(items) {
+export async function startCheckout(items, country) {
   const { data, error } = await supabase.functions.invoke("create-checkout", {
     body: {
+      country,
       items: items.map((i) => ({ id: i.id, size: i.size, qty: i.qty })),
     },
   });

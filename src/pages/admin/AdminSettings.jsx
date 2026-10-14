@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import useSettings from "../../hooks/useSettings";
-import { CURRENCIES, formatPrice } from "../../lib/currency";
+import { CURRENCIES, formatBasePrice } from "../../lib/currency";
 
 export default function AdminSettings() {
   const { currency, freeShippingCents, flatShippingCents, refresh } =
@@ -80,7 +80,7 @@ export default function AdminSettings() {
       <h1 className="display admin-title">settings</h1>
       <p className="mono admin-sub">
         Store currency is {currency}. Free shipping starts at{" "}
-        {formatPrice(freeShippingCents / 100)}.
+        {formatBasePrice(freeShippingCents / 100)}.
       </p>
 
       <form className="settings-form" onSubmit={handleSubmit} noValidate>
